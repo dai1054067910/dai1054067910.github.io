@@ -3,18 +3,25 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Ricy 不二</title>
+  <title>http1.x与http2 | Ricy 不二</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Ricy&apos;s blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ricy 不二">
-<meta property="og:url" content="http://ricytech.com/index.html">
+  <meta name="description" content="http1.xHttp: 文本传输协议(HyperText Transfer Protocol), 位于计算机网络五层中的应用层，基于tcp之上. http 瓶颈与优化长连接在http/1.1中引入keepalive后,不需要在每个request都要进行tcp握手了，请求状况从图1演变成了图2 http pipeline持久http允许重用现有的连接，但意味着要遵从FIFO排队顺序：请求调度-&amp;g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http1.x与http2">
+<meta property="og:url" content="http://ricytech.com/2017/10/07/http1.x与http2/index.html">
 <meta property="og:site_name" content="Ricy 不二">
-<meta property="og:description" content="Ricy&apos;s blog">
+<meta property="og:description" content="http1.xHttp: 文本传输协议(HyperText Transfer Protocol), 位于计算机网络五层中的应用层，基于tcp之上. http 瓶颈与优化长连接在http/1.1中引入keepalive后,不需要在每个request都要进行tcp握手了，请求状况从图1演变成了图2 http pipeline持久http允许重用现有的连接，但意味着要遵从FIFO排队顺序：请求调度-&amp;g">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ricytech.com/images/http2/1.png">
+<meta property="og:image" content="http://ricytech.com/images/http2/2.png">
+<meta property="og:image" content="http://ricytech.com/images/http2/3.png">
+<meta property="og:image" content="http://ricytech.com/images/http2/4.png">
+<meta property="og:image" content="http://ricytech.com/images/http2/5.png">
+<meta property="og:updated_time" content="2017-10-07T12:15:39.468Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ricy 不二">
-<meta name="twitter:description" content="Ricy&apos;s blog">
+<meta name="twitter:title" content="http1.x与http2">
+<meta name="twitter:description" content="http1.xHttp: 文本传输协议(HyperText Transfer Protocol), 位于计算机网络五层中的应用层，基于tcp之上. http 瓶颈与优化长连接在http/1.1中引入keepalive后,不需要在每个request都要进行tcp握手了，请求状况从图1演变成了图2 http pipeline持久http允许重用现有的连接，但意味着要遵从FIFO排队顺序：请求调度-&amp;g">
+<meta name="twitter:image" content="http://ricytech.com/images/http2/1.png">
   
     <link rel="alternate" href="/atom.xml" title="Ricy 不二" type="application/atom+xml">
   
@@ -63,9 +70,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-http1.x与http2" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-http1.x与http2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/10/07/http1.x与http2/" class="article-date">
   <time datetime="2017-10-07T12:15:00.000Z" itemprop="datePublished">2017-10-07</time>
@@ -78,8 +83,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/07/http1.x与http2/">http1.x与http2</a>
+    <h1 class="article-title" itemprop="name">
+      http1.x与http2
     </h1>
   
 
@@ -140,156 +145,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-JS正则" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/10/05/JS正则/" class="article-date">
-  <time datetime="2017-10-05T07:37:00.000Z" itemprop="datePublished">2017-10-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/05/JS正则/">JS 正则</a>
-    </h1>
+    <a href="/2017/10/05/JS正则/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JS 正则</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="string对象中关于正则表达式的方法"><a href="#string对象中关于正则表达式的方法" class="headerlink" title="string对象中关于正则表达式的方法"></a>string对象中关于正则表达式的方法</h2><h3 id="1-search-方法"><a href="#1-search-方法" class="headerlink" title="1. search()方法"></a>1. search()方法</h3><p>该方法用于检索字符串中指定的子字符串，或检索与正 则表达式相匹配的字符串。<br>基本语法：stringObject.search(regexp);</p>
-<h3 id="2-match-方法"><a href="#2-match-方法" class="headerlink" title="2. match()方法"></a>2. match()方法</h3><p>该方法用于在字符串内检索指定的值，或找到一个或者多个正则表达式的匹配。该方法类似于indexOf()或者lastIndexOf(); 但是它返回的是指定的值，而不是字符串的位置;<br>基本语法：stringObject.match(searchValue)或者stringObject.match(regexp)</p>
-<h3 id="3-replace-方法"><a href="#3-replace-方法" class="headerlink" title="3. replace()方法"></a>3. replace()方法</h3><p>该方法用于在字符串中使用一些字符替换另一些字符，或者替换一个与正则表达式匹配的子字符串；<br>基本语法：sstringObject.replace(regexp/substr,replacement);</p>
-<h3 id="3-split-方法"><a href="#3-split-方法" class="headerlink" title="3. split()方法"></a>3. split()方法</h3><p>该方法把一个字符串分割成字符串数组。<br>基本语法：stringObject.split(separator,howmany);</p>
-<h2 id="RegExp对象方法"><a href="#RegExp对象方法" class="headerlink" title="RegExp对象方法"></a>RegExp对象方法</h2><h3 id="1-test-方法"><a href="#1-test-方法" class="headerlink" title="1. test()方法"></a>1. test()方法</h3><p>该方法用于检测一个字符串是否匹配某个模式;<br>基本语法：RegExpObject.test(str);</p>
-<h3 id="2-exec-方法"><a href="#2-exec-方法" class="headerlink" title="2. exec()方法"></a>2. exec()方法</h3><p>该方法用于检索字符串中的正则表达式的匹配。<br>基本语法：RegExpObject.exec(string)</p>
-<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><ul>
-<li>匹配价格: /^\d*(.\d{0,2})?$/</li>
-<li>身份证号码的匹配: /^(\d{14}|\d{17})(\d|[xX])$/</li>
-<li><p>单词的首字母大写:  </p>
-<pre><code>let replaceReg = (reg, str) =&gt; {
-str = str.toLowerCase();
-return str.replace(reg, m =&gt; m.toUpperCase());
-}
-let reg = /\b\w/g
-</code></pre></li>
-<li>验证邮箱的正则表达式:/^ [0-9a-zA-Z<em>]+(@[0-9a-zA-Z</em>])+(.[0-9a-zA-Z_])/</li>
-<li><p>敏感词过滤:</p>
-<pre><code>let str = &apos;我草你妈哈哈背景天胡景涛哪肉涯剪短发欲望&apos;;
-let regExp = /草|肉|欲|胡景涛/g;
-let result = str.replace(regExp, function(match) {
-let len = match.length;
-let str;
-switch (len) {
-    case 1:
-      str = &apos;*&apos;;
-      break;
-  case 2:
-      str = &quot;**&quot;;
-      break;
-  case 3:
-   str = &quot;***&quot;;
-      break;
-  default:
-      str = &apos;****&apos;;
-  }
-return str;
-});
-console.log(result); //我*你妈哈哈背景天***哪*涯剪短发*望
-</code></pre></li>
-<li><p>改字符串为驼峰命名：</p>
-<pre><code>const str = &apos;get-element-by-id&apos;;
-function camelCased(str){
-    let regExp = /-(\w)/g;
-    return str.replace(regExp, (match, p) =&gt; p.toUpperCase());
-};
-console.log(camelCased(str));
-</code></pre></li>
-<li><p>判断连续重复字母:</p>
-<pre><code>let str1 = &apos;abc3d4e5&apos;;
-let str2 = &apos;aab2c3&apos;;
-let regExp = /([a-zA-Z])\1/;
-console.log(regExp.test(str1));//false
-console.log(regExp.test(str2));//true
-</code></pre></li>
-<li><p>提取链接</p>
-<pre><code>let reg = /(&lt;a[.\s]*href\s*=\s*&apos;)(http:\/\/.*)(&apos;&gt;\w*&lt;\/a&gt;)/gi;
-let html = &quot;&lt;div&gt;&lt;a href=&apos;http://www.baidu.com&apos;&gt;222&lt;/a&gt;&lt;p&gt;344&lt;/p&gt;&lt;/div&gt;&quot;;
-html.match(reg);
-console.log(RegExp.$1);
-</code></pre></li>
-</ul>
-<p>本文摘自: [<a href="http://www.cnblogs.com/tugenhua0707/p/5037811.html#_labe9][1" target="_blank" rel="external">http://www.cnblogs.com/tugenhua0707/p/5037811.html#_labe9][1</a>]</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ricytech.com/2017/10/05/JS正则/" data-id="cj8ha99pg00014cqk5dntrh0s" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-前言" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/23/前言/" class="article-date">
-  <time datetime="2017-09-23T04:36:00.000Z" itemprop="datePublished">2017-09-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/23/前言/">前言</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="写博客的原因"><a href="#写博客的原因" class="headerlink" title="写博客的原因"></a>写博客的原因</h3><p>本来自己暂时不想写博客的，因为觉得自己现在还是很菜，学都学不完，写博客实在是花时间，而且还可能误导别人，所以一直都没有写技术博客。但是最近发生的几件事，让我有了写技术博客的念头:</p>
-<ul>
-<li>看博文看了以后经常过两天就遗忘了</li>
-<li>在公司经常要和team share一些技术知识点，每次都要准备挺久</li>
-<li>由于公司security policy，所以自己做的项目外部公司的人是看不见的，以后面试无法直接地正面自己的能力</li>
-</ul>
-<p>所以才决定开始自己的技术博客生涯，顺便锻炼下自己的表达能力以及消遣现在的单身时光</p>
-<h3 id="关于博客的几点声明"><a href="#关于博客的几点声明" class="headerlink" title="关于博客的几点声明"></a>关于博客的几点声明</h3><ul>
-<li>技术内容都是来源于自己的理解，由于自身水平有限，不能保证100%的准确率，忘批评指正</li>
-<li>写博客时肯定会参考其余的技术文章，本人一定会注明出处</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://ricytech.com/2017/09/23/前言/" data-id="cj8ha99pn00024cqk43qoikqa" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 </section>
         
