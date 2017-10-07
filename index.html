@@ -99,12 +99,13 @@
 <h3 id="域分片（Sharding）"><a href="#域分片（Sharding）" class="headerlink" title="域分片（Sharding）"></a>域分片（Sharding）</h3><p>由于http/1.x对客户端tcp连接数目有限制，对于一些大型网站，这是不够用的，所以可以把资源放在多个子域上，由于主机名不同，这样做等于隐式地增加了浏览器的连接限制。但是这样做会带来额外的DNS查找，为每个额外的套接字消耗资源，而且要手动管理资源分配的地点和方式</p>
 <h3 id="减少请求数目"><a href="#减少请求数目" class="headerlink" title="减少请求数目"></a>减少请求数目</h3><h4 id="spriting"><a href="#spriting" class="headerlink" title="spriting"></a>spriting</h4><p>Spriting是一种将很多较小的图片合并成一张大图，再用JavaScript或者CSS将小图重新“切割”出来的技术。网站可以利用这一技巧来达到提速的目的——在HTTP 1.1里，下载一张大图比下载100张小图快得多。</p>
 <h4 id="内联（lnlining）"><a href="#内联（lnlining）" class="headerlink" title="内联（lnlining）"></a>内联（lnlining）</h4><p>Inlining是另外一种防止发送很多小图请求的技巧，它将图片的原始数据嵌入在CSS文件里面的URL里。</p>
-<p> .icon1 {</p>
-<pre><code>background:url(data:image/png;base64,&lt;data&gt;) no-repeat;
-</code></pre><p> }<br> .icon2 {</p>
-<pre><code>background: url(data:image/png;base64,&lt;data&gt;) no-repeat;
-</code></pre><p> }</p>
-<h4 id="拼接（Concatenation）"><a href="#拼接（Concatenation）" class="headerlink" title="拼接（Concatenation）"></a>拼接（Concatenation）</h4><p>大型网站往往会包含大量的JavaScript文件。一些前端工具可以帮助开发人员将这些文件合并为一个大的文件，从而让浏览器能只花费一个请求就将其下载完，而不是发无数请求去分别下载那些琐碎的JavaScript文件。<br>这三个技术的缺陷：</p>
+<pre><code>.icon1 {
+    background:url(data:image/png;base64,&lt;data&gt;) no-repeat;
+}
+.icon2 {
+    background: url(data:image/png;base64,&lt;data&gt;) no-repeat;
+}
+</code></pre><h4 id="拼接（Concatenation）"><a href="#拼接（Concatenation）" class="headerlink" title="拼接（Concatenation）"></a>拼接（Concatenation）</h4><p>大型网站往往会包含大量的JavaScript文件。一些前端工具可以帮助开发人员将这些文件合并为一个大的文件，从而让浏览器能只花费一个请求就将其下载完，而不是发无数请求去分别下载那些琐碎的JavaScript文件。<br>这三个技术的缺陷：</p>
 </li>
 <li>需要额外的预处理，部署注意事项和代码</li>
 <li>任何一个单独的文件单一更新都会重新下载整个文件，导致高字节开销</li>
@@ -134,7 +135,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ricytech.com/2017/10/07/http1.x与http2/" data-id="cj8ha99oq00004cqkiekip7n7" class="article-share-link">Share</a>
+      <a data-url="http://ricytech.com/2017/10/07/http1.x与http2/" data-id="cj8hapk550001s0qkyq2rbj8e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -233,7 +234,7 @@ console.log(RegExp.$1);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ricytech.com/2017/10/05/JS正则/" data-id="cj8ha99pg00014cqk5dntrh0s" class="article-share-link">Share</a>
+      <a data-url="http://ricytech.com/2017/10/05/JS正则/" data-id="cj8hapk500000s0qk3z7x5akm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -280,7 +281,7 @@ console.log(RegExp.$1);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ricytech.com/2017/09/23/前言/" data-id="cj8ha99pn00024cqk43qoikqa" class="article-share-link">Share</a>
+      <a data-url="http://ricytech.com/2017/09/23/前言/" data-id="cj8hapk590002s0qkhx0oact3" class="article-share-link">Share</a>
       
       
     </footer>

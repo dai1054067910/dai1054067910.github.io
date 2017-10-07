@@ -17,7 +17,7 @@
 <meta property="og:image" content="http://ricytech.com/images/http2/3.png">
 <meta property="og:image" content="http://ricytech.com/images/http2/4.png">
 <meta property="og:image" content="http://ricytech.com/images/http2/5.png">
-<meta property="og:updated_time" content="2017-10-07T12:15:39.468Z">
+<meta property="og:updated_time" content="2017-10-07T12:27:58.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="http1.x与http2">
 <meta name="twitter:description" content="http1.xHttp: 文本传输协议(HyperText Transfer Protocol), 位于计算机网络五层中的应用层，基于tcp之上. http 瓶颈与优化长连接在http/1.1中引入keepalive后,不需要在每个request都要进行tcp握手了，请求状况从图1演变成了图2 http pipeline持久http允许重用现有的连接，但意味着要遵从FIFO排队顺序：请求调度-&amp;g">
@@ -104,12 +104,13 @@
 <h3 id="域分片（Sharding）"><a href="#域分片（Sharding）" class="headerlink" title="域分片（Sharding）"></a>域分片（Sharding）</h3><p>由于http/1.x对客户端tcp连接数目有限制，对于一些大型网站，这是不够用的，所以可以把资源放在多个子域上，由于主机名不同，这样做等于隐式地增加了浏览器的连接限制。但是这样做会带来额外的DNS查找，为每个额外的套接字消耗资源，而且要手动管理资源分配的地点和方式</p>
 <h3 id="减少请求数目"><a href="#减少请求数目" class="headerlink" title="减少请求数目"></a>减少请求数目</h3><h4 id="spriting"><a href="#spriting" class="headerlink" title="spriting"></a>spriting</h4><p>Spriting是一种将很多较小的图片合并成一张大图，再用JavaScript或者CSS将小图重新“切割”出来的技术。网站可以利用这一技巧来达到提速的目的——在HTTP 1.1里，下载一张大图比下载100张小图快得多。</p>
 <h4 id="内联（lnlining）"><a href="#内联（lnlining）" class="headerlink" title="内联（lnlining）"></a>内联（lnlining）</h4><p>Inlining是另外一种防止发送很多小图请求的技巧，它将图片的原始数据嵌入在CSS文件里面的URL里。</p>
-<p> .icon1 {</p>
-<pre><code>background:url(data:image/png;base64,&lt;data&gt;) no-repeat;
-</code></pre><p> }<br> .icon2 {</p>
-<pre><code>background: url(data:image/png;base64,&lt;data&gt;) no-repeat;
-</code></pre><p> }</p>
-<h4 id="拼接（Concatenation）"><a href="#拼接（Concatenation）" class="headerlink" title="拼接（Concatenation）"></a>拼接（Concatenation）</h4><p>大型网站往往会包含大量的JavaScript文件。一些前端工具可以帮助开发人员将这些文件合并为一个大的文件，从而让浏览器能只花费一个请求就将其下载完，而不是发无数请求去分别下载那些琐碎的JavaScript文件。<br>这三个技术的缺陷：</p>
+<pre><code>.icon1 {
+    background:url(data:image/png;base64,&lt;data&gt;) no-repeat;
+}
+.icon2 {
+    background: url(data:image/png;base64,&lt;data&gt;) no-repeat;
+}
+</code></pre><h4 id="拼接（Concatenation）"><a href="#拼接（Concatenation）" class="headerlink" title="拼接（Concatenation）"></a>拼接（Concatenation）</h4><p>大型网站往往会包含大量的JavaScript文件。一些前端工具可以帮助开发人员将这些文件合并为一个大的文件，从而让浏览器能只花费一个请求就将其下载完，而不是发无数请求去分别下载那些琐碎的JavaScript文件。<br>这三个技术的缺陷：</p>
 </li>
 <li>需要额外的预处理，部署注意事项和代码</li>
 <li>任何一个单独的文件单一更新都会重新下载整个文件，导致高字节开销</li>
@@ -139,7 +140,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ricytech.com/2017/10/07/http1.x与http2/" data-id="cj8ha99oq00004cqkiekip7n7" class="article-share-link">Share</a>
+      <a data-url="http://ricytech.com/2017/10/07/http1.x与http2/" data-id="cj8hapk550001s0qkyq2rbj8e" class="article-share-link">Share</a>
       
       
     </footer>
