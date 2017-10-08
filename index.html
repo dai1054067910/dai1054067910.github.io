@@ -98,7 +98,7 @@
 <p>我们将系统核心拆分成了4层：数据处理层，模型训练层，模型接口服务提供层，数据服务层。<br><img src="/images/dataAnalysisArchitecture/1.png" alt="&quot;图1&quot;"></p>
 <h3 id="数据处理层"><a href="#数据处理层" class="headerlink" title="数据处理层"></a>数据处理层</h3><p>我们系统的数据都是从上游系统来的，什么形式现在还没正式确定（可以和上游系统商议），公司内部最常用的形式是文件feed,。在这里，进行数据转换工作，我们把数据主要分为两部分，一部分是用于指标显示的（股票前10天的均价，客户成交额等等），存于DB。另一部分用于模型训练，这部分数据可能存DB也可能存为文件格式。<br>技术选型: spring batch vs spark streaming。</p>
 <ul>
-<li>[spring batch][1]: 企业批处理框架，公司内部常用，但不支持实时，可以用来做伪实时，定时（每小时）调度job，不支持分布式，无法支持大量的数据</li>
+<li><a href="http://geek.csdn.net/news/detail/128641" target="_blank" rel="external">spring batch</a>: 企业批处理框架，公司内部常用，但不支持实时，可以用来做伪实时，定时（每小时）调度job，不支持分布式，无法支持大量的数据</li>
 <li>spark streaming: 分布式实时运算框架，支持海量数据，准实时，对一个时间段内的数据收集起来，作为一个RDD，再处理。处于spark生态区，与其类似的是storm，一个纯实时的框架。</li>
 </ul>
 <p>因为本系统每日的数据量不到百万，所以暂时用spring batch来做伪实时的数据处理。<br><img src="/images/dataAnalysisArchitecture/2.png" alt="&quot;图2&quot;"></p>
@@ -128,7 +128,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ricytech.com/2017/10/08/一个小系统架构的后知后觉/" data-id="cj8im5x7i0002m0qknnqtvnse" class="article-share-link">Share</a>
+      <a data-url="http://ricytech.com/2017/10/08/一个小系统架构的后知后觉/" data-id="cj8im9o390002qwqkeeahyl7i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -208,7 +208,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ricytech.com/2017/10/07/http1.x与http2/" data-id="cj8im5x7f0001m0qkekwg10w8" class="article-share-link">Share</a>
+      <a data-url="http://ricytech.com/2017/10/07/http1.x与http2/" data-id="cj8im9o370001qwqkpnsdgxx2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -307,7 +307,7 @@ console.log(RegExp.$1);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ricytech.com/2017/10/05/JS正则/" data-id="cj8im5x790000m0qk9reqz0fs" class="article-share-link">Share</a>
+      <a data-url="http://ricytech.com/2017/10/05/JS正则/" data-id="cj8im9o310000qwqkmhrtvt51" class="article-share-link">Share</a>
       
       
     </footer>
@@ -354,7 +354,7 @@ console.log(RegExp.$1);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ricytech.com/2017/09/23/前言/" data-id="cj8im5x7j0003m0qk29url7sj" class="article-share-link">Share</a>
+      <a data-url="http://ricytech.com/2017/09/23/前言/" data-id="cj8im9o3b0003qwqkxuo5b7nh" class="article-share-link">Share</a>
       
       
     </footer>
