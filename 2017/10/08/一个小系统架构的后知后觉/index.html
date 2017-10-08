@@ -12,20 +12,20 @@
 <meta property="og:site_name" content="Ricy 不二">
 <meta property="og:description" content="由于公司的培养计划，今年8月中旬我rotate到了一个新的团队，新团队的老大找了4个人（包括我）决定做一个辅助trader分析决策的系统，一些指标的图表显示，相似度推荐和预测（涉及到业务，不能多说）。花了一个月进行机器学习的知识储备和需求分析后，开始了短暂的架构之旅。 系统划分在设计一个完整的系统的时候，需要将其拆分成多层，每层系统独立完成一个功能，之间不会有影响，可以独立进行技术选型和架构设计，">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ricytech.com/images/dataAnalysisArchitecture/1.jpg">
-<meta property="og:image" content="http://ricytech.com/images/dataAnalysisArchitecture/2.jpg">
-<meta property="og:image" content="http://ricytech.com/images/dataAnalysisArchitecture/3.jpg">
-<meta property="og:image" content="http://ricytech.com/images/dataAnalysisArchitecture/4.jpg">
-<meta property="og:image" content="http://ricytech.com/images/dataAnalysisArchitecture/5.1.jpg">
-<meta property="og:image" content="http://ricytech.com/images/dataAnalysisArchitecture/5.2.jpg">
-<meta property="og:image" content="http://ricytech.com/images/dataAnalysisArchitecture/6.jpg">
-<meta property="og:image" content="http://ricytech.com/images/dataAnalysisArchitecture/7.jpg">
-<meta property="og:image" content="http://ricytech.com/images/dataAnalysisArchitecture/8.jpg">
-<meta property="og:updated_time" content="2017-10-08T10:08:01.675Z">
+<meta property="og:image" content="http://ricytech.com/images/dataAnalysisArchitecture/1.JPG">
+<meta property="og:image" content="http://ricytech.com/images/dataAnalysisArchitecture/2.JPG">
+<meta property="og:image" content="http://ricytech.com/images/dataAnalysisArchitecture/3.JPG">
+<meta property="og:image" content="http://ricytech.com/images/dataAnalysisArchitecture/4.JPG">
+<meta property="og:image" content="http://ricytech.com/images/dataAnalysisArchitecture/5.1.JPG">
+<meta property="og:image" content="http://ricytech.com/images/dataAnalysisArchitecture/5.2.JPG">
+<meta property="og:image" content="http://ricytech.com/images/dataAnalysisArchitecture/6.JPG">
+<meta property="og:image" content="http://ricytech.com/images/dataAnalysisArchitecture/7.JPG">
+<meta property="og:image" content="http://ricytech.com/images/dataAnalysisArchitecture/8.JPG">
+<meta property="og:updated_time" content="2017-10-08T10:26:49.775Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一个小系统架构的后知后觉">
 <meta name="twitter:description" content="由于公司的培养计划，今年8月中旬我rotate到了一个新的团队，新团队的老大找了4个人（包括我）决定做一个辅助trader分析决策的系统，一些指标的图表显示，相似度推荐和预测（涉及到业务，不能多说）。花了一个月进行机器学习的知识储备和需求分析后，开始了短暂的架构之旅。 系统划分在设计一个完整的系统的时候，需要将其拆分成多层，每层系统独立完成一个功能，之间不会有影响，可以独立进行技术选型和架构设计，">
-<meta name="twitter:image" content="http://ricytech.com/images/dataAnalysisArchitecture/1.jpg">
+<meta name="twitter:image" content="http://ricytech.com/images/dataAnalysisArchitecture/1.JPG">
   
     <link rel="alternate" href="/atom.xml" title="Ricy 不二" type="application/atom+xml">
   
@@ -104,25 +104,25 @@
 <li>社区活跃（文档完整）</li>
 <li>学习难度与团队成员熟悉程度</li>
 </ul>
-<p>我们将系统核心拆分成了4层：数据处理层，模型训练层，模型接口服务提供层，数据服务层。<br><img src="/images/dataAnalysisArchitecture/1.jpg" alt="&quot;图1&quot;"></p>
+<p>我们将系统核心拆分成了4层：数据处理层，模型训练层，模型接口服务提供层，数据服务层。<br><img src="/images/dataAnalysisArchitecture/1.JPG" alt="&quot;图1&quot;"></p>
 <h3 id="数据处理层"><a href="#数据处理层" class="headerlink" title="数据处理层"></a>数据处理层</h3><p>我们系统的数据都是从上游系统来的，什么形式现在还没正式确定（可以和上游系统商议），公司内部最常用的形式是文件feed,。在这里，进行数据转换工作，我们把数据主要分为两部分，一部分是用于指标显示的（股票前10天的均价，客户成交额等等），存于DB。另一部分用于模型训练，这部分数据可能存DB也可能存为文件格式。<br>技术选型: spring batch vs spark streaming。</p>
 <ul>
 <li>[spring batch][1]: 企业批处理框架，公司内部常用，但不支持实时，可以用来做伪实时，定时（每小时）调度job，不支持分布式，无法支持大量的数据</li>
 <li>spark streaming: 分布式实时运算框架，支持海量数据，准实时，对一个时间段内的数据收集起来，作为一个RDD，再处理。处于spark生态区，与其类似的是storm，一个纯实时的框架。</li>
 </ul>
-<p>因为本系统每日的数据量不到百万，所以暂时用spring batch来做伪实时的数据处理。<br><img src="/images/dataAnalysisArchitecture/2.jpg" alt="&quot;图2&quot;"></p>
+<p>因为本系统每日的数据量不到百万，所以暂时用spring batch来做伪实时的数据处理。<br><img src="/images/dataAnalysisArchitecture/2.JPG" alt="&quot;图2&quot;"></p>
 <h3 id="模型训练层"><a href="#模型训练层" class="headerlink" title="模型训练层"></a>模型训练层</h3><p>在系统上线前我们会通过数据预处理-&gt;特征提取-&gt;模型训练-&gt;测试的反复迭代训练好模型，在这里会采用online learning的算法，训练好的模型存为文件（方便以后的还原），并且将选好的特征存到数据库中，这样日常新来的数据就可以直接进行过滤转换了。每隔一段较长时间会重新进行特征的选取。<br>难点：产品上线后模型的准确度测试方法还没想到<br>技术选型： sklearn vs tensorflow vs mllib</p>
 <ul>
 <li>sklearn：上手简单，不支持分布式，传统式机器学习库，文档全，比较适合学习</li>
 <li>tensorflow: google的深度学习框架，支持分布式，文档全</li>
 <li>mllib: spark生态圈的，支持分布式，但库很少</li>
 </ul>
-<p>我们的历史数据达到亿条记录，并且tensorflow前景个人感觉很好，所以就用它了<br><img src="/images/dataAnalysisArchitecture/3.jpg" alt="&quot;图3&quot;"></p>
+<p>我们的历史数据达到亿条记录，并且tensorflow前景个人感觉很好，所以就用它了<br><img src="/images/dataAnalysisArchitecture/3.JPG" alt="&quot;图3&quot;"></p>
 <h3 id="模型接口服务提供层"><a href="#模型接口服务提供层" class="headerlink" title="模型接口服务提供层"></a>模型接口服务提供层</h3><p>这里会用python flask起一个web server去还原tensorflow的模型，并且接受数据服务层的请求来进行模型的调用（预测，相似度判断等）。<br>这是最尴尬的一层，因为我实在没找到除了用python调用tensorflow api以外其它还原模型的方法。如果是以脚本的形式，比如在node中调用一段python代码去调用模型，那么每一个request过来，都得去还原模型一次，这显然是不行的，换成http server的话，可以将其缓存在内存中，只有当模型更新的时候才会去重新还原一次模型。</p>
-<h3 id="数据服务提供层"><a href="#数据服务提供层" class="headerlink" title="数据服务提供层"></a>数据服务提供层</h3><p>这里接受gui的请求，从数据库中去拿数据或者调用模型接口服务。因为这层基本没有逻辑和计算操作，大部分为数据库io操作，所以我们采用node。<br>我们在这层采用微服务的思想（关于微服务的讨论见：<a href="https://www.zhihu.com/question/37808426" target="_blank" rel="external">https://www.zhihu.com/question/37808426</a>）,由于我们的系统主要包含两部分信息client(客户)和security(证券)，两部分信息的显示内容以及用户可进行的操作是不同的，所以将security和client各独立成一个service进程，gui的请求会发送到router上，api router根据url的匹配将请求转发给client和security service。以后扩展，可以在router前个ngnix load balancer, 在service上用pm2管理，实现一个master worker的load balance，甚至还可以引入docker。<br><img src="/images/dataAnalysisArchitecture/4.jpg" alt="&quot;图4&quot;"><br><img src="/images/dataAnalysisArchitecture/5.1.jpg" alt="&quot;图5.1&quot;"><br><img src="/images/dataAnalysisArchitecture/5.2.jpg" alt="&quot;图5.2&quot;"></p>
-<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><p>数据库我们采用的是mongo，这个系统不需要事务的回滚，而且对数据量的存储以及读取性能有一定要求，mongo本身就支持集群，关于关系型数据库以及非关系数据库之间的比较太多，不赘述。<br><img src="/images/dataAnalysisArchitecture/6.jpg" alt="&quot;图6&quot;"><br><img src="/images/dataAnalysisArchitecture/7.jpg" alt="&quot;图7&quot;"></p>
+<h3 id="数据服务提供层"><a href="#数据服务提供层" class="headerlink" title="数据服务提供层"></a>数据服务提供层</h3><p>这里接受gui的请求，从数据库中去拿数据或者调用模型接口服务。因为这层基本没有逻辑和计算操作，大部分为数据库io操作，所以我们采用node。<br>我们在这层采用微服务的思想（关于微服务的讨论见：<a href="https://www.zhihu.com/question/37808426" target="_blank" rel="external">https://www.zhihu.com/question/37808426</a>）,由于我们的系统主要包含两部分信息client(客户)和security(证券)，两部分信息的显示内容以及用户可进行的操作是不同的，所以将security和client各独立成一个service进程，gui的请求会发送到router上，api router根据url的匹配将请求转发给client和security service。以后扩展，可以在router前个ngnix load balancer, 在service上用pm2管理，实现一个master worker的load balance，甚至还可以引入docker。<br><img src="/images/dataAnalysisArchitecture/4.JPG" alt="&quot;图4&quot;"><br><img src="/images/dataAnalysisArchitecture/5.1.JPG" alt="&quot;图5.1&quot;"><br><img src="/images/dataAnalysisArchitecture/5.2.JPG" alt="&quot;图5.2&quot;"></p>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><p>数据库我们采用的是mongo，这个系统不需要事务的回滚，而且对数据量的存储以及读取性能有一定要求，mongo本身就支持集群，关于关系型数据库以及非关系数据库之间的比较太多，不赘述。<br><img src="/images/dataAnalysisArchitecture/6.JPG" alt="&quot;图6&quot;"><br><img src="/images/dataAnalysisArchitecture/7.JPG" alt="&quot;图7&quot;"></p>
 <h3 id="GUI"><a href="#GUI" class="headerlink" title="GUI"></a>GUI</h3><p>这系统类似一个图表系统，感觉什么框架都行，本来我们想用react的，然后在搭建的时候react出了license的问题，因为公司的policy（系统代码永远不对外公开），就转为angular了，而且我们还有人对angular较熟悉，所以license问题解决了，我们也没改变。</p>
-<h3 id="POC阶段"><a href="#POC阶段" class="headerlink" title="POC阶段"></a>POC阶段</h3><p>为了快速立项，所以POC阶段追求简单，我们会直接把数据mock进数据库。<br><img src="/images/dataAnalysisArchitecture/8.jpg" alt="&quot;图8&quot;"></p>
+<h3 id="POC阶段"><a href="#POC阶段" class="headerlink" title="POC阶段"></a>POC阶段</h3><p>为了快速立项，所以POC阶段追求简单，我们会直接把数据mock进数据库。<br><img src="/images/dataAnalysisArchitecture/8.JPG" alt="&quot;图8&quot;"></p>
 <h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>目前刚把router以及两个service公用的私有npm包写完，以上只是对这个系统的构想，后续在实践中还会不断更正，而且我现在还挺菜的，所以肯定有很多不完善的地方，尤其在机器学习那块，经验几乎为0，就靠一个月的强化学习。也许多年以后看见这篇文章会笑吧。</p>
 <p>参考资料：</p>
 <ul>
@@ -137,7 +137,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ricytech.com/2017/10/08/一个小系统架构的后知后觉/" data-id="cj8il6cda0000kwqk11nu1ta6" class="article-share-link">Share</a>
+      <a data-url="http://ricytech.com/2017/10/08/一个小系统架构的后知后觉/" data-id="cj8iltj600002fwqkuyux83zh" class="article-share-link">Share</a>
       
       
     </footer>
