@@ -110,11 +110,11 @@
 </ul>
 <p>我们的历史数据达到亿条记录，并且tensorflow前景个人感觉很好，所以就用它了<br><img src="/images/dataAnalysisArchitecture/3.png" alt="&quot;图3&quot;"></p>
 <h3 id="模型接口服务提供层"><a href="#模型接口服务提供层" class="headerlink" title="模型接口服务提供层"></a>模型接口服务提供层</h3><p>这里会用python flask起一个web server去还原tensorflow的模型，并且接受数据服务层的请求来进行模型的调用（预测，相似度判断等）。<br>这是最尴尬的一层，因为我实在没找到除了用python调用tensorflow api以外其它还原模型的方法。如果是以脚本的形式，比如在node中调用一段python代码去调用模型，那么每一个request过来，都得去还原模型一次，这显然是不行的，换成http server的话，可以将其缓存在内存中，只有当模型更新的时候才会去重新还原一次模型。</p>
-<h3 id="数据服务提供层"><a href="#数据服务提供层" class="headerlink" title="数据服务提供层"></a>数据服务提供层</h3><p>这里接受gui的请求，从数据库中去拿数据或者调用模型接口服务。因为这层基本没有逻辑和计算操作，大部分为数据库io操作，所以我们采用node。<br>我们在这层采用微服务的思想（关于微服务的讨论见：<a href="https://www.zhihu.com/question/37808426" target="_blank" rel="external">https://www.zhihu.com/question/37808426</a>）,由于我们的系统主要包含两部分信息client(客户)和security(证券)，两部分信息的显示内容以及用户可进行的操作是不同的，所以将security和client各独立成一个service进程，gui的请求会发送到router上，api router根据url的匹配将请求转发给client和security service。以后扩展，可以在router前个ngnix load balancer, 在service上用pm2管理，实现一个master worker的load balance，甚至还可以引入docker。<br><img src="/images/dataAnalysisArchitecture/4.png" alt="&quot;图4&quot;"><br><img src="/images/dataAnalysisArchitecture/5.1.png" alt="&quot;图5.1&quot;"><br><img src="/images/dataAnalysisArchitecture/5.2.png" alt="&quot;图5.2&quot;"></p>
+<h3 id="数据服务提供层"><a href="#数据服务提供层" class="headerlink" title="数据服务提供层"></a>数据服务提供层</h3><p>这里接受gui的请求，从数据库中去拿数据或者调用模型接口服务。因为这层基本没有逻辑和计算操作，大部分为数据库io操作，所以我们采用node。<br>我们在这层采用微服务的思想（关于微服务的讨论见：<a href="https://www.zhihu.com/question/37808426" target="_blank" rel="external">https://www.zhihu.com/question/37808426</a>）,由于我们的系统主要包含两部分信息client(客户)和security(证券)，两部分信息的显示内容以及用户可进行的操作是不同的，所以将security和client各独立成一个service进程，gui的请求会发送到router上，api router根据url的匹配将请求转发给client和security service。以后扩展，可以在router前个ngnix load balancer, 在service上用pm2管理，实现一个master worker的load balance，甚至还可以引入docker。<br>关于token验证，如果只在gateway router上做权限认证的话，那么便无需登录可以直接访问service api了，所以要在service上做权限认证。这里会涉及到一个token共享的问题，因为每个service是独立的进程，不会共享资源，现在是存数据库，每个service都会维护一个token的list，一个request到了以后，判断是否存在内存，不存在就去数据库比较，数据库有并且这个token是有效的就添加入这个list，以后会调用公司的权限认证服务，它可以判断该token是否仍有效。这样每个service都会维护着同一份token list了。<img src="/images/dataAnalysisArchitecture/4.png" alt="&quot;图4&quot;"><br><img src="/images/dataAnalysisArchitecture/5.1.png" alt="&quot;图5.1&quot;"><br><img src="/images/dataAnalysisArchitecture/5.2.png" alt="&quot;图5.2&quot;"></p>
 <h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><p>数据库我们采用的是mongo，这个系统不需要事务的回滚，而且对数据量的存储以及读取性能有一定要求，mongo本身就支持集群，关于关系型数据库以及非关系数据库之间的比较太多，不赘述。<br><img src="/images/dataAnalysisArchitecture/6.png" alt="&quot;图6&quot;"><br><img src="/images/dataAnalysisArchitecture/7.png" alt="&quot;图7&quot;"></p>
 <h3 id="GUI"><a href="#GUI" class="headerlink" title="GUI"></a>GUI</h3><p>这系统类似一个图表系统，感觉什么框架都行，本来我们想用react的，然后在搭建的时候react出了license的问题，因为公司的policy（系统代码永远不对外公开），就转为angular了，而且我们还有人对angular较熟悉，所以license问题解决了，我们也没改变。</p>
 <h3 id="POC阶段"><a href="#POC阶段" class="headerlink" title="POC阶段"></a>POC阶段</h3><p>为了快速立项，所以POC阶段追求简单，我们会直接把数据mock进数据库。<br><img src="/images/dataAnalysisArchitecture/8.png" alt="&quot;图8&quot;"></p>
-<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>目前刚把router以及两个service公用的私有npm包写完，以上只是对这个系统的构想，后续在实践中还会不断更正，而且我现在还挺菜的，所以肯定有很多不完善的地方，尤其在机器学习那块，经验几乎为0，就靠一个月的强化学习。也许多年以后看见这篇文章会笑吧。</p>
+<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>目前刚把router以及两个service公用的私有npm包写完，以上只是对这个系统的构想，后续在实践中还会不断更正，而且我现在还挺菜的，所以肯定有很多不完善的地方，尤其在机器学习那块，经验几乎为0，就靠一个月的强化学习。肯定有很多不足，但纪念自己的第一次真正有意义架构。</p>
 <p>参考资料：</p>
 <ul>
 <li><a href="https://tech.meituan.com/online-learning.html" target="_blank" rel="external">https://tech.meituan.com/online-learning.html</a></li>
@@ -128,7 +128,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ricytech.com/2017/10/08/一个小系统架构的后知后觉/" data-id="cj8im9o390002qwqkeeahyl7i" class="article-share-link">Share</a>
+      <a data-url="http://ricytech.com/2017/10/08/一个小系统架构的后知后觉/" data-id="cj8irgx5x0000rsqk3hxo306h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -208,7 +208,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ricytech.com/2017/10/07/http1.x与http2/" data-id="cj8im9o370001qwqkpnsdgxx2" class="article-share-link">Share</a>
+      <a data-url="http://ricytech.com/2017/10/07/http1.x与http2/" data-id="cj8irgx630001rsqk7gmd837w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -307,7 +307,7 @@ console.log(RegExp.$1);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ricytech.com/2017/10/05/JS正则/" data-id="cj8im9o310000qwqkmhrtvt51" class="article-share-link">Share</a>
+      <a data-url="http://ricytech.com/2017/10/05/JS正则/" data-id="cj8irgx670003rsqkcb8wwcqe" class="article-share-link">Share</a>
       
       
     </footer>
@@ -354,7 +354,7 @@ console.log(RegExp.$1);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://ricytech.com/2017/09/23/前言/" data-id="cj8im9o3b0003qwqkxuo5b7nh" class="article-share-link">Share</a>
+      <a data-url="http://ricytech.com/2017/09/23/前言/" data-id="cj8irgx650002rsqkxkxu9do6" class="article-share-link">Share</a>
       
       
     </footer>
