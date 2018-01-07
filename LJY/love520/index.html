@@ -15,8 +15,16 @@
 			/*end top*/
 			/*start box*/
 			.box{width:310px;height:310px;margin:auto;perspective:800px;/*景深*/}
-			.box .pic{position:relative;transform-style:preserve-3d;/*3d环境*/ animation:play 10s linear infinite;/*动画名称 执行时间 匀速 无限执行*/}
+			.box .pic{position:relative;transform-style:preserve-3d;/*3d环境*/ }
+			.ani {
+				animation:play 10s linear infinite;/*动画名称 执行时间 匀速 无限执行*/
+			}
 			.box ul li{list-style:none;position:absolute;top:0;left:0;}
+			.box ul li .tip {
+				text-align: center;
+				color: #fff;
+				display: none;
+			}
 			/*start box*/
 			/*定义一个关键帧*/
 			@keyframes play{
@@ -36,17 +44,35 @@
 		<!--end top-->
 		<!--start box-->
 		<div class="box">
-			<div class="pic">
+			<div class="pic ani">
 				<ul>
-					<li><img title='111' src="images/11.png" width="" height="" alt=""/></li>
-					<li><img title='222' src="images/12.png" width="" height="" alt=""/></li>
-					<li><img title='333' src="images/13.png" width="" height="" alt=""/></li>
-					<li><img title='444' src="images/14.png" width="" height="" alt=""/></li>
-					<li><img title='555' src="images/15.png" width="" height="" alt=""/></li>
-					<li><img title='666' src="images/7.png" width="" height="" alt=""/></li>
-					<li><img title='777' src="images/8.png" width="" height="" alt=""/></li>
-					<li><img title='888' src="images/9.png" width="" height="" alt=""/></li>
-					<li><img title='999' src="images/10.png" width="" height="" alt=""/></li>
+					<li><img src="images/11.png" width="" height="" alt=""/>
+						<p class="tip">梧桐苑1L菠菜面</p>
+					</li>
+					<li><img src="images/12.png" width="" height="" alt=""/>
+						<p class="tip">梧桐苑2L饺子</p>
+					</li>
+					<li><img src="images/13.png" width="" height="" alt=""/>
+						<p class="tip">梧桐苑3L蒸菜</p>
+					</li>
+					<li><img src="images/14.png" width="" height="" alt=""/>
+						<p class="tip">梧桐苑1L红烧排骨</p>
+					</li>
+					<li><img src="images/15.png" width="" height="" alt=""/>
+						<p class="tip">梧桐苑2L自选</p>
+					</li>
+					<li><img src="images/7.png" width="" height="" alt=""/>
+						<p class="tip">梧桐苑3L燃面</p>
+					</li>
+					<li><img src="images/8.png" width="" height="" alt=""/>
+						<p class="tip">梧桐苑3L油泼面</p>
+					</li>
+					<li><img src="images/9.png" width="" height="" alt=""/>
+						<p class="tip">梧桐苑3L米饭套餐</p>
+					</li>
+					<li><img src="images/10.png" width="" height="" alt=""/>
+						<p class="tip">康桥苑3L砂锅</p>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -56,17 +82,17 @@
 		<!--end text-->
 		<!-- 循环音乐播放 -->
 		<script>
-			let songs = ['music', 'sky'];
+			let songs = ['music', '下一站茶山刘', '时光里的他和她', '当爱在靠近'];
 			let audio = new Audio();
 			audio.id = 'music';
 			audio.autoplay = true;
 			let randomNum = Math.floor(Math.random() * songs.length);
-			audio.src = ''+songs[randomNum]+'.mp3';
+			audio.src = 'music/'+songs[randomNum]+'.mp3';
 			songs.splice(randomNum, 1);
 			document.body.appendChild(audio);
 			audio.onended = function(){
 				let randomNum = Math.floor(Math.random() * songs.length);
-				audio.src = ''+songs[randomNum]+'.mp3';
+				audio.src = 'music/'+songs[randomNum]+'.mp3';
 				audio.play();
 				songs.splice(randomNum, 1);
 			};
@@ -82,47 +108,8 @@
 		</script>
 		<!--雪花-->
 		<script src="js/snow.js"></script>
-		<script>
-			let running = true;
-			$(".pic ul li").each(function(i){//遍历
-				var deg=360/$(".pic ul li").size();//size个数
-				//当前的li对象 添加css样式
-				$(this).css({"transform":"rotateY("+deg*i+"deg) translateZ(330px)"});
-				this.click(function(){
-					if(running){
-						setTimeout(function(){
-							running = false;
-						}, Math.floor(Math.random() * deg)*1000);
-					} else {
-						running = true;
-					}
-				});
-				
-				$.fn.snow({
-					minSize:10,
-					maxSize:15,
-					newOn:500,
-					flakeColor:"#ffffff"
-				});
-			});
-			setTimeout(function(){
-				// $(".pic ul li").toggleClass('stop');
-				$(".pic ul li").css({'animation-play-state':'paused'});
-			}, 5000);
-			
-			var i=0;
-			var str="能够遇见你是我最大的幸运，对我来说，不是在最美好的时光遇见了你，而是遇见你后都是最美好的时光！";
-			
-			window.onload=function typing(){
-				//获取div
-				var mydiv=document.getElementById("text");
-				mydiv.innerHTML+=str.charAt(i);
-				i++;
-				var id=setTimeout(typing,100);
-				if(i==str.length){
-					clearTimeout(id);
-				}
-			}
+		<script src="js/main.js">
+
 		</script>
 	</body>
 </html>
